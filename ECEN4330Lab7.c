@@ -41,7 +41,7 @@ __xdata unsigned char* seg7_address = (unsigned char __xdata*) __SEG_7_ADDRESS__
 
 __xdata unsigned char* read_ram_address;
 
- # define write8inline(d) {         \
+# define write8inline(d) {         \
     IOM = 1;                            \
     *lcd_address = d;                       \
     IOM = 0;                            \
@@ -76,14 +76,6 @@ u16
     _width,         ////< Display width as modified by current rotation
     _height;        ////< Display height as modified by current rotation
     
-
-
-
-
-
-
-
-
 
 // Global variables used for memory conservation 
 // Keeping these variables in internal RAM to preserve data integrity of external RAM functions
@@ -201,7 +193,7 @@ void delay (int d) /// x 1ms
     int i,j;
     for (i=0;i<d;i++)
     {
-    for (j=0;j<1000;j++);
+    	for (j=0;j<1000;j++);
     }
 }
 
@@ -268,10 +260,6 @@ void rtcInit(void) {
     }
     
     rtcCmd(__REG_F__, __HR_24__);
-   /* TMOD = 0x01;       //Timer0 mode 1 
-    TH0 = 0XFF;        //Load the timer value
-    TL0 = 0XFF;
-    ET0 = 1;           //Enable TImer0 Interrupt*/
 }
 
 
@@ -338,13 +326,13 @@ inline unsigned char rtcRead(unsigned int addr) {
 void rtcPrint(void) {
     unsigned char t = 0;
 
-	xCursorHold = cursor_x;
-	yCursorHold = cursor_y;
-	textSizeHold = textsize;
+    xCursorHold = cursor_x;
+    yCursorHold = cursor_y;
+    textSizeHold = textsize;
 	
     setTextColor(GRAY, BLACK);
     setTextSize(2);
-	setCursor(132, 304);
+    setCursor(132, 304);
 
     t = rtcRead(__H10_REG__);
     write(t);
@@ -361,9 +349,9 @@ void rtcPrint(void) {
     t = rtcRead(__S1_REG__);
     write(t);
 	
-	cursor_x = xCursorHold;
-	cursor_y = yCursorHold;
-	textsize = textSizeHold;
+    cursor_x = xCursorHold;
+    cursor_y = yCursorHold;
+    textsize = textSizeHold;
 }
 
 
